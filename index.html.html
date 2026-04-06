@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jain Catering Service</title>
+
+<style>
+body {margin:0;font-family:Arial;background:#fff;}
+
+header {
+background:linear-gradient(red,orange);
+color:white;
+text-align:center;
+padding:15px;
+}
+
+.video-box {position:relative;}
+video {width:100%;height:250px;object-fit:cover;}
+
+.overlay {
+position:absolute;
+top:30%;
+width:100%;
+text-align:center;
+color:white;
+font-size:24px;
+font-weight:bold;
+}
+
+.banner-img {
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+section {padding:15px;text-align:center;}
+
+input {
+padding:8px;
+margin:5px;
+width:220px;
+border:2px solid orange;
+border-radius:5px;
+}
+
+button {
+padding:10px;
+margin:5px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+font-weight:bold;
+}
+
+table {width:95%;margin:auto;border-collapse:collapse;}
+th {background:orange;color:white;}
+td,th {border:1px solid #ccc;padding:6px;}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>श्री जैन कैटरिंग सर्विस</h2>
+<p>📞 9785229081</p>
+</header>
+
+<!-- VIDEO -->
+<div class="video-box">
+<video autoplay muted loop>
+<source src="video.mp4">
+</video>
+<div class="overlay">Welcome to Jain Catering</div>
+</div>
+
+<!-- IMAGE -->
+<img class="banner-img" src="banner.jpg">
+
+<section>
+
+<h3>बुकिंग फॉर्म</h3>
+
+<input id="name" placeholder="नाम"><br>
+<input id="mobile" placeholder="मोबाइल"><br>
+<input type="date" id="date"><br>
+
+<label><input type="checkbox" id="plate"> 🍽 Plate</label>
+<label><input type="checkbox" id="labour"> 👷 Labour</label><br>
+
+<input id="people" placeholder="लोग"><br>
+
+<button onclick="saveData()">Save</button>
+<button onclick="refreshPage()">Refresh</button>
+
+</section>
+
+<section>
+
+<h3>बुकिंग डेटा</h3>
+
+<table>
+<tr>
+<th>Select</th>
+<th>नाम</th>
+<th>मोबाइल</th>
+<th>तारीख</th>
+<th>Type</th>
+<th>लोग</th>
+</tr>
+
+<tbody id="table"></tbody>
+</table>
+
+<br>
+<button onclick="deleteSelected()">Delete</button>
+
+<br><br>
+
+<a id="whatsappBtn" target="_blank">
+<button style="background:red;">📲 Send to Owner</button>
+</a>
+
+</section>
+
+<script>
+
+function saveData(){
+
+var name=document.getElementById("name").value;
+var mobile=document.getElementById("mobile").value;
+var date=document.getElementById("date").value;
+var people=document.getElementById("people").value;
+
+var type="";
+if(document.getElementById("plate").checked){ type="Plate"; }
+if(document.getElementById("labour").checked){ type="Labour"; }
+
+if(name==""||mobile==""){
+alert("नाम और मोबाइल जरूरी है");
+return;
+}
+
+if(type==""){
+alert("Type select करो");
+return;
+}
+
+// customer number fix
+if(mobile.length==10){
+mobile="91"+mobile;
+}
+
+// save data
+var data=JSON.parse(localStorage.getItem("data")||"[]");
+data.push({name:name,mobile:mobile,date:date,type:type,people:people});
+localStorage.setItem("data",JSON.stringify(data));
+
+// ✅ OWNER NUMBER (YOUR NUMBER)
+var owner="919785229081";
+
+// message
+var msg="नई enquiry:%0Aनाम:"+name+
+"%0Aमोबाइल:"+mobile+
+"%0Aतारीख:"+date+
+"%0AType:"+type+
+"%0Aलोग:"+people;
+
+var link="https://wa.me/"+owner+"?text="+msg;
+
+// auto open
+window.open(link, "_blank");
+
+// backup button
+document.getElementById("whatsappBtn").href = link;
+
+showData();
+}
+
+function showData(){
+
+var data=JSON.parse(localStorage.getItem("data")||"[]");
+var table=document.getElementById("table");
+table.innerHTML="";
+
+for(var i=0;i<data.length;i++){
+
+var d=data[i];
+
+table.innerHTML+="<tr>"+
+"<td><input type='checkbox' class='chk'></td>"+
+"<td>"+d.name+"</td>"+
+"<td>"+d.mobile+"</td>"+
+"<td>"+d.date+"</td>"+
+"<td>"+d.type+"</td>"+
+"<td>"+d.people+"</td>"+
+"</tr>";
+}
+}
+
+function deleteSelected(){
+
+var data=JSON.parse(localStorage.getItem("data")||"[]");
+var checks=document.getElementsByClassName("chk");
+
+var newData=[];
+
+for(var i=0;i<checks.length;i++){
+if(!checks[i].checked){
+newData.push(data[i]);
+}
+}
+
+localStorage.setItem("data",JSON.stringify(newData));
+showData();
+}
+
+function refreshPage(){
+location.reload();
+}
+
+showData();
+
+</script>
+
+</body>
+</html>
