@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jain Catering Service</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+}
+
+/* HEADER */
+header{
+text-align:center;
+padding:20px;
+color:white;
+font-size:24px;
+font-weight:bold;
+background:linear-gradient(45deg,#ff0000,#ff9900);
+}
+
+/* SLIDER */
+.slider{
+position:relative;
+width:100%;
+height:250px;
+overflow:hidden;
+}
+
+.slider img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+animation:cinematic 15s infinite;
+}
+
+.slider img:nth-child(1){animation-delay:0s;}
+.slider img:nth-child(2){animation-delay:5s;}
+.slider img:nth-child(3){animation-delay:10s;}
+
+@keyframes cinematic{
+0%{opacity:0; transform:scale(1);}
+10%{opacity:1; transform:scale(1.05);}
+40%{opacity:1; transform:scale(1.15);}
+50%{opacity:0;}
+100%{opacity:0;}
+}
+
+.overlay{
+position:absolute;
+top:40%;
+width:100%;
+text-align:center;
+color:white;
+font-size:28px;
+font-weight:bold;
+text-shadow:3px 3px 10px black;
+}
+
+/* CARD */
+.card{
+max-width:420px;
+margin:20px auto;
+background:rgba(255,255,255,0.92);
+padding:25px;
+border-radius:20px;
+box-shadow:0 15px 30px rgba(0,0,0,0.3);
+text-align:center;
+}
+
+input,select{
+width:90%;
+padding:12px;
+margin:10px 0;
+border-radius:12px;
+border:2px solid #ff9800;
+}
+
+/* VEG + SALAD GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+padding:10px;
+}
+
+.grid img{
+width:100%;
+height:80px; /* छोटा size */
+object-fit:cover;
+border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* BUTTON */
+button{
+width:95%;
+padding:14px;
+background:linear-gradient(45deg,#00c853,#009624);
+color:white;
+border:none;
+border-radius:15px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+background:#222;
+color:white;
+padding:10px;
+margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio autoplay loop controls style="width:100%;">
+<source src="your-music.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+🍽️ श्री जैन कैटरिंग सर्विस<br>📞 9785229081
+</header>
+
+<!-- SLIDER -->
+<div class="slider">
+<div class="overlay">Delicious Food • Royal Service</div>
+
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<img src="https://images.unsplash.com/photo-1555244162-803834f70033">
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+</div>
+
+<!-- VEG + SALAD SECTION -->
+<div class="card">
+<h3>🥗 Salad & 🥦 Vegetables</h3>
+
+<div class="grid">
+<img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9">
+<img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce">
+<img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443">
+<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+<img src="https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31">
+<img src="https://images.unsplash.com/photo-1540420773420-3366772f4999">
+</div>
+</div>
+
+<!-- FORM -->
+<div class="card">
+
+<h2>🎉 बुकिंग फॉर्म</h2>
+
+<input id="name" placeholder="👤 आपका नाम">
+<input id="mobile" placeholder="📱 मोबाइल नंबर">
+
+<select id="event">
+<option>कार्यक्रम चुनें</option>
+<option>शादी</option>
+<option>सगाई</option>
+<option>जन्मदिन</option>
+</select>
+
+<select id="menu">
+<option>मेन्यू चुनें</option>
+<option>साधारण भोजन</option>
+<option>स्पेशल भोजन</option>
+<option>प्रीमियम भोजन</option>
+</select>
+
+<input type="date" id="date">
+<input id="people" placeholder="👥 लोग">
+<input id="address" placeholder="📍 पता">
+
+<button onclick="sendBooking()">🚀 Order Now</button>
+
+</div>
+
+<!-- SMALL DINNER SET -->
+<div class="card">
+<h3>🍱 Dinner Set (Premium)</h3>
+
+<div class="grid">
+<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+<img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75">
+<img src="https://images.unsplash.com/photo-1546069901-eacef0df6022">
+</div>
+
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/919785229081">💬</a>
+
+<footer>
+© Jain Catering Service | Premium Quality
+</footer>
+
+<script>
+function sendBooking(){
+var name=document.getElementById("name").value;
+var mobile=document.getElementById("mobile").value;
+var event=document.getElementById("event").value;
+var menu=document.getElementById("menu").value;
+var date=document.getElementById("date").value;
+var people=document.getElementById("people").value;
+var address=document.getElementById("address").value;
+
+if(name==""||mobile==""){
+alert("नाम और मोबाइल जरूरी है");
+return;
+}
+
+var msg="नई booking:%0Aनाम:"+name+
+"%0Aमोबाइल:"+mobile+
+"%0Aकार्यक्रम:"+event+
+"%0Aतारीख:"+date+
+"%0Aमेन्यू:"+menu+
+"%0Aलोग:"+people+
+"%0Aपता:"+address;
+
+window.open("https://wa.me/919785229081?text="+msg,"_blank");
+}
+</script>
+
+</body>
+</html>
